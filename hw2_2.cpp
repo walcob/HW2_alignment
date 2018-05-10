@@ -69,7 +69,7 @@ int main(int argc, char* argv[]){ // ./hw2.exe seq1 seq2 score_matrix result
   int gap;
   std::cout<<"Enter gap penalty: ";
   std::cin>>gap;
-  std::cout<<'\n';
+  std::cout<<std::endl;
   
   std::ofstream matrix;
   matrix.open("mattest.txt");
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]){ // ./hw2.exe seq1 seq2 score_matrix result
   read_s1.open(argv[1]);
   read_s2.open(argv[2]);
   if(!read_s1.is_open()){
-    std::cerr<<"File "<<argv[1]<<" could not be opened!\n";
+    std::cerr<<"File "<<argv[1]<<" could not be opened!"<<std::endl;
     return -1;
   }
   else{
@@ -90,7 +90,7 @@ int main(int argc, char* argv[]){ // ./hw2.exe seq1 seq2 score_matrix result
   }
   
   if(!read_s2.is_open()){
-    std::cerr<<"File "<<argv[2]<<" could not be opened!\n";
+    std::cerr<<"File "<<argv[2]<<" could not be opened!"<<std::endl;
     return -1;
   }
   else{
@@ -99,13 +99,13 @@ int main(int argc, char* argv[]){ // ./hw2.exe seq1 seq2 score_matrix result
    
   read.open(argv[3]);
   if(!read.is_open()){
-    std::cerr<<"File "<<argv[3]<<" could not be opened!\n";
+    std::cerr<<"File "<<argv[3]<<" could not be opened!"<<std::endl;
     return -1;
   }
   
   read>>Nacross>>Ndown;
   if(Nacross != seq1.size() || Ndown != seq2.size()){
-      std::cerr<<"Alignment score files not the right dimensions.\n";
+      std::cerr<<"Alignment score files not the right dimensions."<<std::endl;
       return -1;
   }
   
@@ -210,7 +210,7 @@ int main(int argc, char* argv[]){ // ./hw2.exe seq1 seq2 score_matrix result
   std::ofstream results;
   results.open(argv[4]);
   if(!results.is_open()){
-    std::cerr<<"File "<<argv[4]<<" could not be opened.\n";
+    std::cerr<<"File "<<argv[4]<<" could not be opened."<<std::endl;
     return -1;
   }
   results<<align1<<std::endl<<align2;
