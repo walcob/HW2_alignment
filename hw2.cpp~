@@ -1,0 +1,63 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+//this was borrowed directly from HW1
+//take the FASTA sequence and convert it into a string with no blank spaces
+std::string read_sequence(std::istream &seq){
+	std::string sequence;
+	std::vector <std::string> lines;
+	std::string line;
+	while(!seq.eof()){
+		std::getline(seq, line);
+		lines.push_back(line);
+	}
+	
+	//append each line into the sequence ignoring lines that begin with ">"
+	int i = 0;
+	while(i<lines.size()){
+		if(lines[i][0]=='>') i++;
+		else{
+			sequence += lines[i];
+			i++;
+		}
+	}
+	
+	//eliminate blank space characters from sequence
+	std::string::iterator pos = sequence.begin();
+	while(pos != sequence.end()){
+		if(std::isspace(*pos)) sequence.erase(pos);
+		else{
+			//convert lowercase characters to capital letters
+			*pos = toupper(*pos);
+			pos++;
+		}
+	}
+	return sequence;
+}
+int main(int argc, char* argv[]){ // ./hw2.exe seq1 seq2 score_matrix
+  
+  int cols, rows; //number of collumns and rows in matrix
+  
+  //read the matrix
+  std::ifstream read;
+  read.open(argv[3]);
+  if(!read.is_open()){
+    std::cerr<<"File "<<argv[1]<<" could not be opened!\n";
+    return -1;
+  }
+  
+  else{
+    read>>cols>>rows;
+    int S[cols][rows]; //score matrix
+    //read scores
+    for(int i = 0; i<rows; i++){
+      for(int j = 0; j<cols; j++){
+        read>>matrix[j][i];
+      }
+    }
+    
+    char A[cols+1][rows+1];  //alignment matrix
+    int T[cols+1][rows+1];  //traceback matrix
+    
